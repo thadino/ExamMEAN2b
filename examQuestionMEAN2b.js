@@ -127,12 +127,17 @@ Det bedste bud her er cluster. Brugen deraf kan ses i clustersQuestion2.js.
 //     })
 // });
 
+
+
+
+
 /*
  Question 4 ---- Explain, using relevant examples, how to implement sessions, and the legal implications of doing this.)
 
 Først jura: Hvis man bruger session cookies (hvilket alle gør), skal man i EU gøre brugeren opmærksom derpå.
 
-    I app.js er der et eksempel på session cookies med express-session npm pakken.
+    I app.js er der et eksempel på session cookies med cookieSession npm pakken.
+    Kør clustersQuestion2 og så ind på chrome - localhost:3000/rgbToHex/255/255/255
     */
 
 

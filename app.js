@@ -40,14 +40,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var sess;
 
+//Gå ind på denne url
 app.get("/rgbToHex/:red/:green/:blue", function (req, res)
 {
     //VIRKER IKKE FØRSTE GANG COS NO COOKIE YET!!!
     console.log("incomming req, her er color: " + req.session.color);
     sess = req.session
     var red = parseInt(req.params.red, 10);
-    var green = parseInt(req.params.red, 10);
-    var blue = parseInt(req.params.red, 10);
+    var green = parseInt(req.params.green, 10);
+    var blue = parseInt(req.params.blue, 10);
     var hex = converter.rgbToHex(red, green, blue);
     sess.color = hex;
     res.status(200).send(hex);
