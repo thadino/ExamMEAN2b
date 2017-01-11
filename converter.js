@@ -12,11 +12,14 @@ exports.rgbToHex = function (red, green, blue)
 //denne er da et hex tal, altid skal være to cifre. Derfor prepender vi nul hvis length er === 1
 function pad(hex)
 {
+    console.log("here is hex in pad " + hex)
     return (hex.length === 1 ? "0" + hex : hex);
 }
 
 exports.hexToRgb = function (hex)
 {
+
+    console.log("here is hex " + hex)
 
     var red = parseInt(hex.substring(0, 2), 16);
     var green = parseInt(hex.substring(2, 4), 16);

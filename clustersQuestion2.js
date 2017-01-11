@@ -12,6 +12,9 @@ var debug = require('debug')('ExamQuestionMEAN2b:server');
 var http = require('http');
 const cluster = require("cluster");
 const numCPUs = require('os').cpus().length;
+var appjs = require('./app');
+
+
 
 /**
  * Get port from environment and store in Express.
@@ -125,6 +128,8 @@ function onListening()
     debug('Listening on ' + bind);
 }
 
+
+app.use('/', appjs);
 
 
 

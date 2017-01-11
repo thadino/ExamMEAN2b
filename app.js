@@ -5,16 +5,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session')
+// var session = require("express-session");
 var converter = require("./converter");
-var session = require("express-session");
+
 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.set('trust proxy', 1)
 
 
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2']
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,10 +33,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(session({secret: "llama", cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
+// app.use(session({secret: "llama", cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-let testVar = "start value";
+
 
 var sess;
 
@@ -51,14 +58,15 @@ app.get("/hexToRgb", function (req, res)
     //VIRKER IKKE FØRSTE GANG COS NO COOKIE YET!!!
     console.log("incomming req, her er color: " + req.session.color);
     sess = req.session
-    var hex = req.query.hex;
-    var rgb = converter.hexToRgb(hex);
+    console.log(sess.color + "query hex here")
+    // var hex = req.query.hex;
+    var rgb = converter.hexToRgb(sess.color);
+    console.log("do i get here after converter??")
     sess.color = rgb;
     res.status(200).send(JSON.stringify(rgb));
 });
 
-app.use('/', index);
-app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next)
