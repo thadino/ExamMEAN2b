@@ -50,7 +50,7 @@ if (cluster.isMaster) {
 else {
 
     server.listen(port);
-    console.log(`Worker ${process.pid} started and listening to ${port}`);
+    console.log(`Worker ${process.pid} started`);
     // server.on('error', onError);
     // server.on('listening', onListening);
 }
